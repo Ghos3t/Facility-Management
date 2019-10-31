@@ -96,8 +96,13 @@ public class User implements Serializable {
 			}
 			errorMsgs.setErrorMsg();
 		} else if (action.equals("modifyUser")) {
-			errorMsgs.setUsernameError(validateUser_name(username));
-			errorMsgs.setRoleError(validateUserRole(role));
+			if (username.equals("")) {
+				System.out.println("inside username.equals(\"\")");
+				errorMsgs.setUsernameError("Username cannot be blank");
+			} else if (!username.equals("")) {
+				errorMsgs.setUsernameError(validateUser_name(username));
+				errorMsgs.setRoleError(validateUserRole(role));
+			}
 			errorMsgs.setErrorMsg();
 		}
 	}
@@ -108,15 +113,13 @@ public class User implements Serializable {
 		String result = "";
 		if (!stringSize(username, 8, 20)) {
 			System.out.println("inside length check");
-			result = "Your User Name must between 8 and 20 characters";			
-		}
-		else if (isTextAnInteger(username)) {
+			result = "Your User Name must between 8 and 20 characters";
+		} else if (isTextAnInteger(username)) {
 			System.out.println("inside numeric check");
-			result = "Your user name cannot be numeric";			
-		}
-		else if (!UserDAO.userExists(username)) {
+			result = "Your user name cannot be numeric";
+		} else if (!UserDAO.userExists(username)) {
 			System.out.println("inside user exists check check");
-			result = "Given user does not exist in database, please provide a username for a pre-existing user";
+			result = "Given user does not exist in database please provide a username for a pre-existing user";
 		}
 		return result;
 	}
@@ -175,7 +178,8 @@ public class User implements Serializable {
 		System.out.println("inside validateUserRole()");
 		// Must be one of the following roles user, repairer, facility_manager, admin
 		String result = "";
-		Set<String> roles = Stream.of("user", "repairer", "facility_manager", "admin").collect(Collectors.toCollection(HashSet::new));
+		Set<String> roles = Stream.of("user", "repairer", "facility_manager", "admin")
+				.collect(Collectors.toCollection(HashSet::new));
 
 		if (!roles.contains(role))
 			result = "The new role must be one of the following types: user, repairer, facility_manager, admin";
