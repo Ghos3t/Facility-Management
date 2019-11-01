@@ -83,7 +83,7 @@ public class AdminController extends HttpServlet {
 			ArrayList<User> userInDB = new ArrayList<User>();
 
 			System.out.println("after userInDB");
-			if (UerrorMsgs.getErrorMsg().equals("")) {
+			if (UerrorMsgs.getErrorMsg().equalsIgnoreCase("")) {
 				System.out.println("inside IF of UerrorMsgs.getErrorMsg()");
 				userInDB = UserDAO.searchUsers(lastname);
 
@@ -116,7 +116,7 @@ public class AdminController extends HttpServlet {
 
 			user.validateUser(action, user, UerrorMsgs);
 
-			if (UerrorMsgs.getErrorMsg().equals("")) {
+			if (UerrorMsgs.getErrorMsg().equalsIgnoreCase("")) {
 				try {
 					UserDAO.modifyUser(username, role);
 				} catch (SQLException e) {

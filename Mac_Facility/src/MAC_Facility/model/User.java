@@ -78,28 +78,28 @@ public class User implements Serializable {
 	}
 
 	public void validateUser(String action, User user, UserErrorMsgs errorMsgs) {
-		if (action.equals("saveUser")) {
+		if (action.equalsIgnoreCase("saveUser")) {
 ////			errorMsgs.setCompanyIDerror(validateIdcompany(action,company.getIdcompany()));
 ////			errorMsgs.setCompanyNameError(validateCompany_name(company.getCompany_name()));
 ////			errorMsgs.setPhoneError(validatePhone(company.getPhone()));
 //			errorMsgs.setLastNameError(validateEmail(company.getEmail()));
 //			errorMsgs.setErrorMsg();
-		} else if (action.equals("searchUser")) {
-			System.out.println("inside validateUser action searchUser");
-			System.out.println("last_name = " + last_name);
+		} else if (action.equalsIgnoreCase("searchUser")) {
+//			System.out.println("inside validateUser action searchUser");
+//			System.out.println("last_name = " + last_name);
 
-			if (last_name.equals("")) {
-				System.out.println("inside last_name.equals(\"\")");
+			if (last_name.equalsIgnoreCase("")) {
+//				System.out.println("inside last_name.equals(\"\")");
 				errorMsgs.setLastNameError("Last Name cannot be blank");
-			} else if (!last_name.equals("")) {
+			} else if (!last_name.equalsIgnoreCase("")) {
 				errorMsgs.setLastNameError(validatLast_name(last_name));
 			}
 			errorMsgs.setErrorMsg();
-		} else if (action.equals("modifyUser")) {
-			if (username.equals("")) {
-				System.out.println("inside username.equals(\"\")");
-				errorMsgs.setUsernameError("Username cannot be blank");
-			} else if (!username.equals("")) {
+		} else if (action.equalsIgnoreCase("modifyUser")) {
+			if (username.equalsIgnoreCase("") || role.equalsIgnoreCase("")) {
+//				System.out.println("inside username.equals(\"\")");
+				errorMsgs.setUsernameError("Username and Role cannot be blank");
+			} else if (!username.equalsIgnoreCase("") && !role.equalsIgnoreCase("")) {
 				errorMsgs.setUsernameError(validateUser_name(username));
 				errorMsgs.setRoleError(validateUserRole(role));
 			}
@@ -108,81 +108,81 @@ public class User implements Serializable {
 	}
 
 	private String validateUser_name(String username) {
-		System.out.println("inside validateUser_name()");
+//		System.out.println("inside validateUser_name()");
 		// Username: is not numeric 8 <= Length <= 20 unique (not in DB)
 		String result = "";
 		if (!stringSize(username, 8, 20)) {
-			System.out.println("inside length check");
+//			System.out.println("inside length check");
 			result = "Your User Name must between 8 and 20 characters";
 		} else if (isTextAnInteger(username)) {
-			System.out.println("inside numeric check");
+//			System.out.println("inside numeric check");
 			result = "Your user name cannot be numeric";
 		} else if (!UserDAO.userExists(username)) {
-			System.out.println("inside user exists check check");
+//			System.out.println("inside user exists check check");
 			result = "Given user does not exist in database please provide a username for a pre-existing user";
 		}
 		return result;
 	}
 
-	private String validatFirst_name(String first_name) {
-		String result = "";
-		if (!stringSize(first_name, 3, 40))
-			result = "Your Last Name must be between 3 and 40 characters";
-		else if (Character.isLowerCase(first_name.charAt(0)))
-			result = "Your last name must start with a capital letter";
-		else if (containsNumericValue(first_name))
-			result = "Your last name should not contain any numeric values";
-		return result;
-	}
+//	private String validatFirst_name(String first_name) {
+//		String result = "";
+//		if (!stringSize(first_name, 3, 40))
+//			result = "Your Last Name must be between 3 and 40 characters";
+//		else if (Character.isLowerCase(first_name.charAt(0)))
+//			result = "Your last name must start with a capital letter";
+//		else if (containsNumericValue(first_name))
+//			result = "Your last name should not contain any numeric values";
+//		return result;
+//	}
 
 	private String validatLast_name(String lastname) {
 		// Last name: Starts with Capital Letter, 3 <= Length <= 40, Contains no numeric
 		// values
-		System.out.println("inside validatLast_name() = " + lastname);
+//		System.out.println("inside validatLast_name() = " + lastname);
 		String result = "";
 		if (!stringSize(lastname, 3, 40))
 			result = "Your Last Name must be between 3 and 40 characters";
 		else if (Character.isLowerCase(lastname.charAt(0))) {
-			System.out.println("inside lower case check");
+//			System.out.println("inside lower case check");
 			result = "Your last name must start with a capital letter";
 		} else if (containsNumericValue(lastname))
 			result = "Your last name should not contain any numeric values";
 		return result;
 	}
 
-	private String validatePhone(String phone) {
-		String result = "";
-		if (phone.length() != 10)
-			result = "Phone number must be 10 digits in length";
-		else if (!isTextAnInteger(phone))
-			result = "Phone number must be a number";
-		return result;
-	}
+//	private String validatePhone(String phone) {
+//		String result = "";
+//		if (phone.length() != 10)
+//			result = "Phone number must be 10 digits in length";
+//		else if (!isTextAnInteger(phone))
+//			result = "Phone number must be a number";
+//		return result;
+//	}
 
-	private String validateEmail(String email) {
-		String result = "", extension = "";
-		if (!email.contains("@"))
-			result = "Email address needs to contain @";
-		else if (!stringSize(email, 7, 45))
-			result = "Email address must be between 7 and 45 characters long";
-		else {
-			extension = email.substring(email.length() - 4, email.length());
-			if (!extension.equals(".org") && !extension.equals(".edu") && !extension.equals(".com")
-					&& !extension.equals(".net") && !extension.equals(".gov") && !extension.equals(".mil"))
-				result = "Invalid domain name";
-		}
-		return result;
-	}
+//	private String validateEmail(String email) {
+//		String result = "", extension = "";
+//		if (!email.contains("@"))
+//			result = "Email address needs to contain @";
+//		else if (!stringSize(email, 7, 45))
+//			result = "Email address must be between 7 and 45 characters long";
+//		else {
+//			extension = email.substring(email.length() - 4, email.length());
+//			if (!extension.equals(".org") && !extension.equals(".edu") && !extension.equals(".com")
+//					&& !extension.equals(".net") && !extension.equals(".gov") && !extension.equals(".mil"))
+//				result = "Invalid domain name";
+//		}
+//		return result;
+//	}
 
 	private String validateUserRole(String role) {
-		System.out.println("inside validateUserRole()");
+//		System.out.println("inside validateUserRole()");
 		// Must be one of the following roles user, repairer, facility_manager, admin
 		String result = "";
 		Set<String> roles = Stream.of("user", "repairer", "facility_manager", "admin")
 				.collect(Collectors.toCollection(HashSet::new));
 
 		if (!roles.contains(role))
-			result = "The new role must be one of the following types: user, repairer, facility_manager, admin";
+			result = "The new role must be one of the following types: user; repairer; facility_manager; admin";
 
 		return result;
 	}

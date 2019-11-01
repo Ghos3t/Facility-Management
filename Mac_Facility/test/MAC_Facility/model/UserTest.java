@@ -36,9 +36,7 @@ public class UserTest {
 		assertTrue(firstNameError.equals(UerrorMsgs.getFirst_nameError()));
 		assertTrue(lastNameError.equals(UerrorMsgs.getLastNameError()));
 		assertTrue(phoneError.equals(UerrorMsgs.getPhoneError()));
-		assertTrue(emailError.equals(UerrorMsgs.getEmailError()));
+		assertTrue(emailError.equals(UerrorMsgs.getEmailError()));		
 		assertTrue(roleError.equals(UerrorMsgs.getRoleError()));
-
-//		fail("Not yet implemented");
 	}
 }

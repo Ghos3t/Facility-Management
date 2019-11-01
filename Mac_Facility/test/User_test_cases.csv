@@ -6,7 +6,7 @@
 6,searchUser,,Abc,,,,,,,,,,,
 7,searchUser,,Abcdefghijklmnopqrstuvwxyzabcdefghijklmn,,,,,,,,,,,
 8,searchUser,,abcdefghijklmnopqrstuvwxyzabcdefghijklmnp,,,,,Please correct the following errors,,,Your Last Name must be between 3 and 40 characters,,,
-9,modifyUser,,,,,,user,Please correct the following errors,Username cannot be blank,,,,,
+9,modifyUser,,,,,,user,Please correct the following errors,Username and Role cannot be blank,,,,,
 10,modifyUser,Pujaredij,,,,,user,,,,,,,
 11,modifyUser,12345678,,,,,user,Please correct the following errors,Your user name cannot be numeric,,,,,
 12,modifyUser,abcdefg,,,,,user,Please correct the following errors,Your User Name must between 8 and 20 characters,,,,,
@@ -14,3 +14,4 @@
 14,modifyUser,Abcdefghijklmnopqrst,,,,,user,,,,,,,
 15,modifyUser,Abcdefghijklmnopqrstu,,,,,user,Please correct the following errors,Your User Name must between 8 and 20 characters,,,,,
 16,modifyUser,RandomUsr,,,,,user,Please correct the following errors,Given user does not exist in database please provide a username for a pre-existing user,,,,,
+17,modifyUser,Pujaredij,,,,,anon,Please correct the following errors,,,,,,The new role must be one of the following types: user; repairer; facility_manager; admin
