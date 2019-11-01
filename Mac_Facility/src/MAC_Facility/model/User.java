@@ -78,30 +78,23 @@ public class User implements Serializable {
 	}
 
 	public void validateUser(String action, User user, UserErrorMsgs errorMsgs) {
-		if (action.equalsIgnoreCase("saveUser")) {
-////			errorMsgs.setCompanyIDerror(validateIdcompany(action,company.getIdcompany()));
-////			errorMsgs.setCompanyNameError(validateCompany_name(company.getCompany_name()));
-////			errorMsgs.setPhoneError(validatePhone(company.getPhone()));
-//			errorMsgs.setLastNameError(validateEmail(company.getEmail()));
-//			errorMsgs.setErrorMsg();
-		} else if (action.equalsIgnoreCase("searchUser")) {
+		if (action.equalsIgnoreCase("searchUser")) {
 //			System.out.println("inside validateUser action searchUser");
 //			System.out.println("last_name = " + last_name);
 
 			if (last_name.equalsIgnoreCase("")) {
 //				System.out.println("inside last_name.equals(\"\")");
 				errorMsgs.setLastNameError("Last Name cannot be blank");
-			} else if (!last_name.equalsIgnoreCase("")) {
+			} else /* if (!last_name.equalsIgnoreCase("")) */ {
 				errorMsgs.setLastNameError(validatLast_name(last_name));
 			}
 			errorMsgs.setErrorMsg();
-		} else if (action.equalsIgnoreCase("modifyUser")) {
-			if (username.equalsIgnoreCase("") || role.equalsIgnoreCase("")) {
-//				System.out.println("inside username.equals(\"\")");
-				errorMsgs.setUsernameError("Username and Role cannot be blank");
-			} else if (!username.equalsIgnoreCase("") && !role.equalsIgnoreCase("")) {
+		} else /* if (action.equalsIgnoreCase("modifyUser")) */ {
+			if (!username.equalsIgnoreCase("") && !role.equalsIgnoreCase("")) {
 				errorMsgs.setUsernameError(validateUser_name(username));
 				errorMsgs.setRoleError(validateUserRole(role));
+			} else /* if (username.equalsIgnoreCase("") || role.equalsIgnoreCase("")) */ {
+				errorMsgs.setUsernameError("Username and Role cannot be blank");
 			}
 			errorMsgs.setErrorMsg();
 		}
